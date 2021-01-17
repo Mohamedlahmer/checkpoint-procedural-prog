@@ -1,0 +1,134 @@
+
+/* procedure dot_product*/
+
+
+PROCEDURE dot_product (VAR V1: ARRAY_OF FLOAT[2], VAR V2 : ARRAY_OF FLOAT[2])
+VAR
+
+    PS: FLOAT := 0;
+    i,j : INTEGER;
+
+BEGIN
+    
+read (V1);
+read (V2);
+
+FOR i FROM 0 TO V1.length STEP 1  DO
+    FOR j FROM 0 TO V2.length STEP 1  DO
+        
+        IF (i=j) THEN
+            PS := PS + ( V1[i] * V2[j] );
+        END_IF
+
+    END_FOR
+END_FOR
+
+
+END
+
+
+/* algo_procedure */
+
+
+ALGORITHM othogonal
+VAR
+    V : ARRAY_OF FLOAT[2];
+    n : INTEGER;
+    i : INTEGER;
+
+    PROCEDURE dot_product (VAR V1: ARRAY_OF FLOAT[2], VAR V2 : ARRAY_OF FLOAT[2]);
+        PS: FLOAT := 0;
+        i,j : INTEGER;
+    BEGIN
+        read (V1);
+        read (V2);
+
+                FOR i FROM 0 TO V1.length STEP 1  DO
+                    FOR j FROM 0 TO V2.length STEP 1  DO
+        
+                        IF (i=j) THEN
+                            PS := PS + ( V1[i] * V2[j] );
+                        END_IF
+
+                    END_FOR
+                END_FOR
+    
+        IF (PS = 0) THEN
+            write ("the two vectors are orthogonal");
+        ELSE
+            write ("the two vectors are not orthogonal");
+        END_IF
+        
+    END
+
+
+BEGIN
+    
+    REPEAT
+        write ("enter the number of vectors");
+        read (n);
+    UNTIL ( (n >= 0) and (n mod 2 =0))
+
+    FOR i FROM 0 TO n STEP 1  DO
+        read (V);
+    END_FOR
+
+    dot_product(V1,V2);
+
+
+END
+
+
+/* algo_function*/
+
+
+ALGORITHM orthogonal
+VAR
+    V : ARRAY_OF FLOAT[2];
+    n : INTEGER;
+    i : INTEGER;
+    P : FLOAT;
+
+    FUNCTION dot_product(V1: ARRAY_OF FLOAT[2], V2 : ARRAY_OF FLOAT[2]) : FLOAT ;
+    VAR
+        PS: FLOAT := 0;
+        i,j : INTEGER;
+    BEGIN
+        read (V1);
+        read (V2);
+
+                FOR i FROM 0 TO V1.length STEP 1  DO
+                    FOR j FROM 0 TO V2.length STEP 1  DO
+        
+                        IF (i=j) THEN
+                            PS := PS + ( V1[i] * V2[j] );
+                        END_IF
+
+                    END_FOR
+                END_FOR    
+                
+        RETURN PS;
+    END
+
+
+BEGIN
+
+    REPEAT
+        write ("enter the number of vectors");
+        read (n);
+    UNTIL ( (n >= 0) and (n mod 2 =0))
+
+    FOR i FROM 0 TO n STEP 1  DO
+        read (V);
+    END_FOR
+
+    P := dot_product (V1,V2);
+
+    IF (P=0) THEN
+        write ("the two vectors are orthogonal");
+    ELSE
+        write ("the two vectors are not orthogonal");
+    END_IF
+
+
+END
